@@ -48,4 +48,14 @@ public class Client {
         return id;
     }
 
+    public boolean suppressionPortfeuille() {
+        if (this.portfeuille != null) {
+            if(this.portfeuille.getActions().isEmpty()){
+                this.portfeuille = null;
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
