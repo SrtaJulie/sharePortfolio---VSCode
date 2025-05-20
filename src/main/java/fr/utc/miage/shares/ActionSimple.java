@@ -15,9 +15,6 @@
  */
 package fr.utc.miage.shares;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Allows the creation of simple Action objects.
  *
@@ -25,17 +22,16 @@ import java.util.Map;
  */
 public class ActionSimple extends Action {
 
-    private static final int DEFAULT_ACTION_VALUE = 0;
-
-    // attribut lien
-    private final Map<Jour, Float> mapCours;
+    private static final double DEFAULT_ACTION_VALUE = 0.01;
 
     // constructeur
     public ActionSimple(final String libelle) {
         // Action simple initialisée comme 1 action
         super(libelle);
-        // init spécifique
-        this.mapCours = new HashMap<>();
+    }
+
+    public static double getDefaultActionValue() {
+        return DEFAULT_ACTION_VALUE;
     }
 
 }

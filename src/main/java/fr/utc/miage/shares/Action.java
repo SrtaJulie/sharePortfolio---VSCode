@@ -15,6 +15,8 @@
  */
 package fr.utc.miage.shares;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -25,6 +27,7 @@ import java.util.Objects;
 public abstract class Action {
 
     private final String libelle;
+    private final Map<Jour, Double> mapCours;
 
     /**
      * Get the value of libelle
@@ -42,8 +45,9 @@ public abstract class Action {
      */
     protected Action(final String libelle) {
         this.libelle = libelle;
+        this.mapCours = new HashMap<>();
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
