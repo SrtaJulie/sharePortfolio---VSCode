@@ -37,12 +37,12 @@ L’application doit permettre aussi d’enregistrer le cours d’une action sim
 
 Adrien LISTL
 - login GitHub : @craftlistl
-- rôle : Développeuse
+- rôle : Développeur
 - binôme : n°1
 
 Bastien BORIES
 - login GitHub : @Bastien8131
-- rôle : Développeuse
+- rôle : Développeur
 - binôme : n°1
 
 Chloé HENRY
