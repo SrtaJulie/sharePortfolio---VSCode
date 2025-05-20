@@ -54,27 +54,7 @@ public class ActionComposee extends Action {
     }
     public void setComposition(Map<String, Float> composition) {
         this.composition = composition;
-    }
-    
-    // enrg possible si pas de cours pour ce jour
-    public void enrgCours(final Jour j, final float v) {
-        if (!this.mapCours.containsKey(j)) {
-            this.mapCours.put(j, v);
-        }
-    }
-
-    //Enregistrer pour chaque 
-
-    @Override
-    public float valeur(final Jour j) {
-        if (this.mapCours.containsKey(j)) {
-            return this.mapCours.get(j);
-        } else {
-            return DEFAULT_ACTION_VALUE;
-        }
-    }
-
-    
+    }  
 }
 
 }
