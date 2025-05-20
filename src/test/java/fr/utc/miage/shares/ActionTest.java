@@ -92,10 +92,6 @@ class ActionTest {
             super(aLabel);
         }
 
-        @Override
-        public float valeur(final Jour aJour) {
-            return 0.0F;
-        }
     }
 
 }
