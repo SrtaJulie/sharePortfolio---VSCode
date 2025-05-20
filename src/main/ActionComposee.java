@@ -58,11 +58,15 @@ public ActionComposee(Map<ActionSimple, Float> composition) {
     }
 
     /**
-     * Retourne la composition totale de l'ActionComposee.
+     * Retourne la composition totale de l'ActionComposee avec les libellés des actions.
      * @return 
      */
-    public Map<ActionSimple, Float> getComposition() {
-        return composition;
+    public Map<String, Float> getComposition() {
+        Map<String, Float> compositionLibelle = new HashMap<>();
+        for (Map.Entry<ActionSimple, Float> entry : composition.entrySet()) {
+            compositionLibelle.put(entry.getKey().getLibelle(), entry.getValue());
+        }
+        return compositionLibelle;
     }
 
 }
