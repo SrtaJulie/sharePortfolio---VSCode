@@ -24,11 +24,42 @@ public class ActionComposee {
         if (pourcentage <= 0) {
             throw new IllegalArgumentException("La valeur du pourcentage doit être supérieure à 0.");
         }
-        float total = getTotalPercentage() + pourcentage;
+        float total = getPourcentageTot() + pourcentage;
         if (total > 100.0f) {
             throw new IllegalArgumentException("Le pourcentage total ne doit pas dépasser 100.");
         }
         composition.put(actionSimple, pourcentage);
+    }
+
+    public float getPourcentageTot() {
+        float total = 0.0f;
+        for (Float value : composition.values()) {
+            total += value;
+        }
+        return total;
+    }
+        /**
+     * Retirer une ActionSimple de la composition.
+     * @param actionSimple 
+     */
+    public void retirerAction(ActionSimple actionSimple) {
+        composition.remove(actionSimple);
+    }
+    /**
+     * Récupérer le pourcentage d'une ActionSimple dans la composition.
+     * @param actionSimple 
+     * @return 
+     */
+    public Float getPourcentage(ActionSimple actionSimple) {
+        return composition.get(actionSimple);
+    }
+
+    /**
+     * Retourne la composition totale de l'ActionComposee.
+     * @return 
+     */
+    public Map<ActionSimple, Float> getComposition() {
+        return composition;
     }
 
 }
