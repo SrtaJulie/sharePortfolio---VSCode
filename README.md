@@ -23,12 +23,13 @@ Un portefeuille d’action est une entité virtuelle constituée d’une ou plus
 quantités achetées potentiellement différentes.
 
 Une action simple contient les caractéristiques supplémentaires suivantes :
-• Les cours pour chaque jour (un jour est caractérisé par l'année et le numéro du jour).
+- Les cours pour chaque jour (un jour est caractérisé par l'année et le numéro du jour).
+
 Une action composée est composée (en pourcentage) de plusieurs actions simples (panier d’actions).
 
 Liste des services disponibles sur un portefeuille d’actions.
-• Connaître la valeur du d’une action ainsi que du portefeuille (pour un jour donné).
-• Acheter et vendre des actions.
+- Connaître la valeur du d’une action ainsi que du portefeuille (pour un jour donné).
+- Acheter et vendre des actions.
 
 L’application doit permettre aussi d’enregistrer le cours d’une action simple pour un jour donné ainsi que la composition d’une action composée
 
