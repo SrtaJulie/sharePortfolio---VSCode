@@ -41,7 +41,7 @@ class ActionSimpleTest {
     }
 
     @Test
-    void testMapCours() {
+    void testJourDeMapCours() {
         ActionSimple action = new ActionSimple("Test Action");
 
         action.getMapCours().put(new Jour(2025, 1), 100.0);
