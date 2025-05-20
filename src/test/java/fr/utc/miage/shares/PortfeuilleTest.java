@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Adrien Listl Bastien Bories;.
+ * Copyright 2025 Team Dev ABCEJOY;.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
