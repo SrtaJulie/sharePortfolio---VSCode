@@ -45,12 +45,12 @@ Bastien BORIES
 - binôme : n°1
 
 Chloé HENRY
-- login GitHub : 
+- login GitHub : @chloeina
 - rôle : Développeuse
 - binôme : n°2
 
 Emma MEDINA
-- login GitHub :
+- login GitHub : @Memma31
 - rôle : Développeuse
 - binôme : n°2
 
@@ -59,16 +59,16 @@ Julie BONNET
 - rôle : Responsable GitHub et PO
 
 Océane ETOUBLEAU-ETIENNE
-- login GitHub : 
+- login GitHub : @HellOShael
 - rôle : Développeuse
 - binôme : n°3
   
 Yasmine SIDANE
-- login GitHub : 
+- login GitHub : @Yasmine-2000
 - Rôle : Développeuse
 - binôme : n°3
 
 ## Lien utiles
 
-  - Sonar : 
+  - Sonar : https://sonarcloud.io/project/overview?id=SrtaJulie_sharePortfolio---VSCode
   - Google Drive : https://drive.google.com/drive/folders/1rgkHFCrUwSsMnlYHDWWewOURSuFQI7e3?usp=sharing
