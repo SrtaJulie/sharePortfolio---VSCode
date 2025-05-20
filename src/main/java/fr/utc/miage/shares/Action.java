@@ -29,6 +29,10 @@ public abstract class Action {
     private final String libelle;
     private final Map<Jour, Double> mapCours;
 
+    public Map<Jour, Double> getMapCours() {
+        return mapCours;
+    }
+
     /**
      * Get the value of libelle
      *
