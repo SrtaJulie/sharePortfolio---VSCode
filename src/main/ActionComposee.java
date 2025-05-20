@@ -11,9 +11,12 @@ public class ActionComposee {
     //Map associant une Action simple à un pourcentage
     private Map<ActionSimple, Float> composition;
 
-    public ActionComposee() {
-        this.composition = new HashMap<>();
+public ActionComposee(Map<ActionSimple, Float> composition) {
+    if (composition == null || composition.size() < 2) {
+        throw new IllegalArgumentException("Une action composée doit contenir au moins deux actions simples.");
     }
+    this.composition = new HashMap<>(composition);
+}
     /**
      * Ajouter une ActionSimple à la composition.
      * @param actionSimple 
@@ -45,7 +48,7 @@ public class ActionComposee {
     public void retirerAction(ActionSimple actionSimple) {
         composition.remove(actionSimple);
     }
-    /**
+    /** 
      * Récupérer le pourcentage d'une ActionSimple dans la composition.
      * @param actionSimple 
      * @return 
