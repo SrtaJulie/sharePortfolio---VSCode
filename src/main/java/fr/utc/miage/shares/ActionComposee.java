@@ -1,3 +1,22 @@
+/**
+ * Copyright 2025 Team Dev ABCEJOY.
+
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 package fr.utc.miage.shares;
 
 import java.util.HashMap;
@@ -55,18 +74,6 @@ public ActionComposee(Map<ActionSimple, Float> composition) {
      */
     public Float getPourcentage(ActionSimple actionSimple) {
         return composition.get(actionSimple);
-    }
-
-    /**
-     * Retourne la composition totale de l'ActionComposee avec les libellés des actions.
-     * @return 
-     */
-    public Map<String, Float> getComposition() {
-        Map<String, Float> compositionLibelle = new HashMap<>();
-        for (Map.Entry<ActionSimple, Float> entry : composition.entrySet()) {
-            compositionLibelle.put(entry.getKey().getLibelle(), entry.getValue());
-        }
-        return compositionLibelle;
     }
 
 }
