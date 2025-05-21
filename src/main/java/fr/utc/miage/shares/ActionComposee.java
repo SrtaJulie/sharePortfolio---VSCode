@@ -75,5 +75,5 @@ public ActionComposee(Map<ActionSimple, Float> composition) {
     public Float getPourcentage(ActionSimple actionSimple) {
         return composition.get(actionSimple);
     }
-
-}
+   
+    }
