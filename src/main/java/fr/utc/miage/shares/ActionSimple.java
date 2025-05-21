@@ -46,5 +46,14 @@ public class ActionSimple extends Action {
         }
         cour.put(jour, valeur);
     }
+    /**
+     * Ajoute un cours à la liste des cours de l'action.
+     *
+     * @param jour le jour du cours
+     * @param cours le cours de l'action
+     */
+    public String getLibelle() {
+        return super.getLibelle();
+    }
 
 }
