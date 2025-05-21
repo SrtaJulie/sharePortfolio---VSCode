@@ -16,6 +16,7 @@
 package fr.utc.miage.shares;
 
 public class Client {
+
     private static int lastID = 0;
 
     private Portfeuille portfeuille;
@@ -27,8 +28,9 @@ public class Client {
         this.nom = nom;
         this.portfeuille = portfeuille;
         this.prenom = prenom;
-        this.id = lastID +1;
-        lastID = lastID + 1;
+        this.id = lastID + 1;
+
+        augmenteID();
     }
 
     public Portfeuille getPortfeuille() {
@@ -60,13 +62,23 @@ public class Client {
     }
 
     public boolean suppressionPortfeuille() {
-        if (this.portfeuille != null) {
-            if(this.portfeuille.getActions().isEmpty()){
-                this.portfeuille = null;
-                return true;
-            }
+        if (this.portfeuille != null && this.portefeuilleVide()) {
+            this.portfeuille = null;
+            return true;
         }
         return false;
+    }
+
+    private boolean portefeuilleVide() {
+        if (this.portfeuille.getActions().isEmpty()) {
+            this.portfeuille = null;
+            return true;
+        }
+        return false;
+    }
+
+    private static void augmenteID() {
+        lastID = lastID + 1;
     }
 
 }

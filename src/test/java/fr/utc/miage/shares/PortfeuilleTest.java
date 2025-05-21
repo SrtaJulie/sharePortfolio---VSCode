@@ -29,9 +29,7 @@ class PortfeuilleTest {
 
     @Test
     void testNewPortfeuille(){
-        assertDoesNotThrow(() -> {
-            Portfeuille p = new Portfeuille();
-        });
+        assertDoesNotThrow(Portfeuille::new);
     }
 
     @Test
