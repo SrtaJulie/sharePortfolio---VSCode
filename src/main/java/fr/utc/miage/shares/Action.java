@@ -42,14 +42,16 @@ public abstract class Action {
         return libelle;
     }
 
+    
+
     /**
      * Builds an Action object from a string parameter.
      *
      * @param libelle the name of the action object
      */
-    protected Action(final String libelle) {
+    protected Action(final String libelle, final HashMap<Jour,Double> cour) {
         this.libelle = libelle;
-        this.mapCours = new HashMap<>();
+        this.mapCours = cour;
     }
 
     @Override

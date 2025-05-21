@@ -18,7 +18,10 @@
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,17 +30,24 @@ class ActionSimpleTest {
 
     private static final double VALEUR_MINIMAL_COURS = 0.01;
     private static final String LIBELLE_ACTION_SIMPLE = "tagada";
-    final ActionSimple actions= new ActionSimple(LIBELLE_ACTION_SIMPLE);
+    private static final Jour JOUR_COUR = new Jour(2025,4);
+    private static final HashMap<Jour, Double> COUR = new HashMap<>();
+    final ActionSimple actions= new ActionSimple(LIBELLE_ACTION_SIMPLE, COUR);
     
-    // @Test
-    // void testValeurCoursSup0() {
-        
-    // }
+    @Test
+    void testValeurCoursInferieur0ShouldTrhowExcepton() {
+        assertThrows(IllegalArgumentException.class, () -> actions.ajouterCours(JOUR_COUR, -1.0));
+    }
 
-    // @Test
-    // void testValeurDuCoursPasEgalA0(){
-       
-    // }
+    @Test
+    void testValeurDuCoursEgalA0ShouldTrhowException(){
+       assertThrows(IllegalArgumentException.class, () -> actions.ajouterCours(JOUR_COUR, 0.0));
+    }
+
+    @Test
+    void testCourValueSup0ShouldNotThrhowException(){
+            actions.ajouterCours(JOUR_COUR, VALEUR_MINIMAL_COURS); // Ne doit pas lever d'exception
+    }
 
     @Test
     void testLibelleIdentique(){
@@ -52,13 +62,13 @@ class ActionSimpleTest {
     @Test
     void testConstructorWithCorrectParametersShouldWork() {
         Assertions.assertDoesNotThrow(()->{
-            new ActionSimple(LIBELLE_ACTION_SIMPLE);
+            new ActionSimple(LIBELLE_ACTION_SIMPLE, COUR);
         });
     }
 
     @Test
     void testJourDeMapCours() {
-        ActionSimple action = new ActionSimple("Test Action");
+        ActionSimple action = new ActionSimple("Test Action", COUR);
 
         action.getMapCours().put(new Jour(2025, 1), 100.0);
         action.getMapCours().put(new Jour(2025, 2), 105.0);

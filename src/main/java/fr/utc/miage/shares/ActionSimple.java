@@ -15,6 +15,10 @@
  */
 package fr.utc.miage.shares;
 
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Allows the creation of simple Action objects.
  *
@@ -25,13 +29,22 @@ public class ActionSimple extends Action {
     private static final double DEFAULT_ACTION_VALUE = 0.01;
 
     // constructeur
-    public ActionSimple(final String libelle) {
+    public ActionSimple(final String libelle, final HashMap<Jour, Double> cour) {
         // Action simple initialisée comme 1 action
-        super(libelle);
+        super(libelle, cour);
     }
 
     public static double getDefaultActionValue() {
         return DEFAULT_ACTION_VALUE;
+    }
+
+    private Map<Jour, Double> cour = new HashMap<>();
+
+    public void ajouterCours(Jour jour, double valeur) {
+        if (valeur <= 0.0) {
+            throw new IllegalArgumentException("La valeur du cours doit être strictement positive.");
+        }
+        cour.put(jour, valeur);
     }
 
 }

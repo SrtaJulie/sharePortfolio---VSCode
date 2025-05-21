@@ -15,6 +15,8 @@
  */
 package fr.utc.miage.shares;
 
+import java.util.HashMap;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +24,8 @@ class ActionTest {
 
     private static final String FOO_SHARE1 = "Foo Share 1";
     private static final String FOO_SHARE2 = "Foo Share 2";
+    private static final HashMap<Jour, Double> COUR = new HashMap<>();
+
 
     @Test
     void testGetLibelleReturnConstructorParameter() {
@@ -89,7 +93,7 @@ class ActionTest {
     private static class ActionImpl extends Action {
 
         public ActionImpl(final String aLabel) {
-            super(aLabel);
+            super(aLabel,COUR);
         }
 
     }
