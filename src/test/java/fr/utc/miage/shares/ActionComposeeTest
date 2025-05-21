@@ -1,0 +1,30 @@
+package fr.utc.miage.shares;
+
+import org.junit.jupiter.api.Test;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ActionComposeeTest {
+
+    @Test
+    void testCreateAndDisplayActionComposee() {
+        ActionSimple action1 = new ActionSimple("Action A");
+        ActionSimple action2 = new ActionSimple("Action B");
+
+        Map<ActionSimple, Float> composition = new HashMap<>();
+        composition.put(action1, 60.0f);
+        composition.put(action2, 40.0f);
+
+        ActionComposee actionComposee = new ActionComposee(composition);
+
+        System.out.println("Composition : " + actionComposee.getComposition());
+
+        Map<String, Float> expected = new HashMap<>();
+        expected.put("Action A", 60.0f);
+        expected.put("Action B", 40.0f);
+
+        assertEquals(expected, actionComposee.getComposition());
+    }
+}
