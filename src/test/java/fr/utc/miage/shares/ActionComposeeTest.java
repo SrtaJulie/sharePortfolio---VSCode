@@ -1,19 +1,3 @@
-/*
- * Copyright 2025 Team Dev ABCEJOY;.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  	http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package fr.utc.miage.shares;
 
 import org.junit.jupiter.api.Test;
@@ -29,7 +13,6 @@ public class ActionComposeeTest {
     private ActionSimple action2;
     private Map<ActionSimple, Float> validComposition;
 
-    // Prépare deux actions simples et une composition valide avant chaque test
     @BeforeEach
     void setup() {
         Jour jour1 = new Jour(2023, 2);
@@ -49,36 +32,97 @@ public class ActionComposeeTest {
         validComposition.put(action2, 40.0f);
     }
 
-    // Vérifie la construction correcte et la récupération de la composition
+    // Teste la construction correcte et la récupération de la composition
+@Test
+void testValidConstructionAndGetComposition() {
+    ActionComposee ac = new ActionComposee(validComposition);
+    Map<String, Float> expected = new HashMap<>();
+    expected.put("Action A", 60.0f); // ✅ corrige ici
+    expected.put("Action B", 40.0f);
+    assertEquals(expected, ac.getComposition());
+}
+
+
+    // Teste la récupération du pourcentage d'une action
     @Test
-    void testValidConstructionAndGetComposition() {
+    void testGetPourcentage() {
         ActionComposee ac = new ActionComposee(validComposition);
-        Map<String, Float> expected = new HashMap<>();
-        expected.put("Action A", 60.0f);
-        expected.put("Action B", 40.0f);
-        assertEquals(expected, ac.getComposition());
+        assertEquals(60.0f, ac.getPourcentage(action1));
+        assertEquals(40.0f, ac.getPourcentage(action2));
+        // Teste pour une action non présente
+        ActionSimple fake = new ActionSimple("Fake", new HashMap<>());
+        assertNull(ac.getPourcentage(fake));
     }
 
-    // Vérifie qu'une exception est levée si on essaie de créer une ActionComposee avec moins de 2 actions
+    // Teste le calcul du pourcentage total
     @Test
-    void testConstructeurA() {
+    void testGetPourcentageTot() {
+        ActionComposee ac = new ActionComposee(validComposition);
+        assertEquals(100.0f, ac.getPourcentageTot());
+    }
+
+    // Teste l'ajout d'une action valide
+@Test
+void testAjoutAction() {
+    // Crée une composition initiale à 90%
+    Map<ActionSimple, Float> partialComposition = new HashMap<>();
+    partialComposition.put(action1, 60.0f);
+    partialComposition.put(action2, 30.0f); // total = 90%
+
+    ActionComposee ac = new ActionComposee(partialComposition);
+    ActionSimple action3 = new ActionSimple("Action C", new HashMap<>());
+    ac.ajoutAction(action3, 10f); // OK maintenant
+
+    assertEquals(10f, ac.getPourcentage(action3));
+}
+
+    // Teste l'ajout d'une action avec un pourcentage négatif ou nul
+    @Test
+    void testAjoutActionPourcentageInvalide() {
+        ActionComposee ac = new ActionComposee(validComposition);
+        ActionSimple action3 = new ActionSimple("Action C", new HashMap<>());
+        assertThrows(IllegalArgumentException.class, () -> ac.ajoutAction(action3, 0.0f));
+        assertThrows(IllegalArgumentException.class, () -> ac.ajoutAction(action3, -10.0f));
+    }
+
+    // Teste l'ajout d'une action qui ferait dépasser 100%
+    @Test
+    void testAjoutActionDepassement() {
+        ActionComposee ac = new ActionComposee(validComposition);
+        ActionSimple action3 = new ActionSimple("Action C", new HashMap<>());
+        assertThrows(IllegalArgumentException.class, () -> ac.ajoutAction(action3, 50.0f));
+    }
+
+    // Teste le retrait d'une action
+    @Test
+    void testRetirerAction() {
+        ActionComposee ac = new ActionComposee(validComposition);
+        ac.retirerAction(action1);
+        assertNull(ac.getPourcentage(action1));
+        // On peut aussi vérifier que la composition ne contient plus l'action
+        assertFalse(ac.getComposition().containsKey("Action A"));
+    }
+
+    // Teste la protection contre modification externe de la map retournée
+    @Test
+    void testCompositionReturnsCopy() {
+        ActionComposee ac = new ActionComposee(validComposition);
+        Map<String, Float> comp1 = ac.getComposition();
+        comp1.put("Fake", 10.0f);
+        assertFalse(ac.getComposition().containsKey("Fake"));
+    }
+
+    // Teste la construction avec moins de 2 actions
+    @Test
+    void testConstructeurAvecMoinsDeDeuxActions() {
         Map<ActionSimple, Float> invalid = new HashMap<>();
         invalid.put(action1, 100.0f);
         assertThrows(IllegalArgumentException.class, () -> new ActionComposee(invalid));
     }
 
-    // Vérifie qu'une exception est levée si la composition passée au constructeur est nulle
+    // Teste la construction avec une composition nulle
     @Test
-    void testConstructeurB() {
+    void testConstructeurAvecNull() {
         assertThrows(IllegalArgumentException.class, () -> new ActionComposee(null));
-    }
-
-    // Vérifie que getComposition retourne une copie et non la map interne (protection contre modification externe)
-    @Test
-    void testComposition() {
-        ActionComposee ac = new ActionComposee(validComposition);
-        Map<String, Float> comp1 = ac.getComposition();
-        comp1.put("Fake", 10.0f);
-        assertFalse(ac.getComposition().containsKey("Fake"));
     }
 }
