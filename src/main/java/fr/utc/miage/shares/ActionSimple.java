@@ -15,6 +15,7 @@
  */
 package fr.utc.miage.shares;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,32 +26,25 @@ import java.util.Map;
  */
 public class ActionSimple extends Action {
 
-    private static final int DEFAULT_ACTION_VALUE = 0;
-
-    // attribut lien
-    private final Map<Jour, Float> mapCours;
+    private static final double DEFAULT_ACTION_VALUE = 0.01;
 
     // constructeur
-    public ActionSimple(final String libelle) {
+    public ActionSimple(final String libelle, final HashMap<Jour, Double> cour) {
         // Action simple initialisée comme 1 action
-        super(libelle);
-        // init spécifique
-        this.mapCours = new HashMap<>();
+        super(libelle, cour);
     }
 
-    // enrg possible si pas de cours pour ce jour
-    public void enrgCours(final Jour j, final float v) {
-        if (!this.mapCours.containsKey(j)) {
-            this.mapCours.put(j, v);
-        }
+    public static double getDefaultActionValue() {
+        return DEFAULT_ACTION_VALUE;
     }
 
-    @Override
-    public float valeur(final Jour j) {
-        if (this.mapCours.containsKey(j)) {
-            return this.mapCours.get(j);
-        } else {
-            return DEFAULT_ACTION_VALUE;
+    private Map<Jour, Double> cour = new HashMap<>();
+
+    public void ajouterCours(Jour jour, double valeur) {
+        if (valeur <= 0.0) {
+            throw new IllegalArgumentException("La valeur du cours doit être strictement positive.");
         }
+        cour.put(jour, valeur);
     }
+
 }

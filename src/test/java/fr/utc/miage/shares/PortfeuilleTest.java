@@ -46,7 +46,7 @@ class PortfeuilleTest {
     @Test
     void testPortefeuilleSetter(){
         Portfeuille p = new Portfeuille();
-        Action action = new ActionSimple(ACTION_LIBELLE);
+        Action action = new ActionSimple(ACTION_LIBELLE, null);
 
         ArrayList<Action> expected = new ArrayList<>();
 

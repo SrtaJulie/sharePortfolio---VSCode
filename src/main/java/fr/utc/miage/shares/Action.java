@@ -15,6 +15,8 @@
  */
 package fr.utc.miage.shares;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -25,6 +27,11 @@ import java.util.Objects;
 public abstract class Action {
 
     private final String libelle;
+    private final Map<Jour, Double> mapCours;
+
+    public Map<Jour, Double> getMapCours() {
+        return mapCours;
+    }
 
     /**
      * Get the value of libelle
@@ -35,22 +42,17 @@ public abstract class Action {
         return libelle;
     }
 
+    
+
     /**
      * Builds an Action object from a string parameter.
      *
      * @param libelle the name of the action object
      */
-    protected Action(final String libelle) {
+    protected Action(final String libelle, final HashMap<Jour,Double> cour) {
         this.libelle = libelle;
+        this.mapCours = cour;
     }
-
-    /**
-     * Provides the value of the action object for a given day.
-     *
-     * @param j
-     * @return
-     */
-    public abstract float valeur(Jour j);
 
     @Override
     public int hashCode() {
