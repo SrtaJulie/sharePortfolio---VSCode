@@ -17,44 +17,68 @@
 package fr.utc.miage.shares;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class ActionComposeeTest {
 
-    @Test
-    void testCreateAndDisplayActionComposee() {
-        // Create Jour
+    private ActionSimple action1;
+    private ActionSimple action2;
+    private Map<ActionSimple, Float> validComposition;
+
+    // Prépare deux actions simples et une composition valide avant chaque test
+    @BeforeEach
+    void setup() {
         Jour jour1 = new Jour(2023, 2);
         Jour jour2 = new Jour(2023, 12);
 
-        // Create cours for each ActionSimple
         HashMap<Jour, Double> cour1 = new HashMap<>();
-        cour1.put(jour1, (double) 100.0f);
+        cour1.put(jour1, 100.0);
 
         HashMap<Jour, Double> cour2 = new HashMap<>();
-        cour2.put(jour2, (double) 200.0f);
+        cour2.put(jour2, 200.0);
 
-        // Create ActionSimple
-        ActionSimple action1 = new ActionSimple("Action A", cour1);
-        ActionSimple action2 = new ActionSimple("Action B", cour2);
+        action1 = new ActionSimple("Action A", cour1);
+        action2 = new ActionSimple("Action B", cour2);
 
-        // Compose ActionComposee
-        Map<ActionSimple, Float> composition = new HashMap<>();
-        composition.put(action1, 40.0f);
-        composition.put(action2, 40.0f);
+        validComposition = new HashMap<>();
+        validComposition.put(action1, 60.0f);
+        validComposition.put(action2, 40.0f);
+    }
 
-        ActionComposee actionComposee = new ActionComposee(composition);
+    // Vérifie la construction correcte et la récupération de la composition
+    @Test
+    void testValidConstructionAndGetComposition() {
+        ActionComposee ac = new ActionComposee(validComposition);
+        Map<String, Float> expected = new HashMap<>();
+        expected.put("Action A", 60.0f);
+        expected.put("Action B", 40.0f);
+        assertEquals(expected, ac.getComposition());
+    }
 
-        System.out.println("Composition : " + actionComposee.getComposition());
+    // Vérifie qu'une exception est levée si on essaie de créer une ActionComposee avec moins de 2 actions
+    @Test
+    void testConstructeurA() {
+        Map<ActionSimple, Float> invalid = new HashMap<>();
+        invalid.put(action1, 100.0f);
+        assertThrows(IllegalArgumentException.class, () -> new ActionComposee(invalid));
+    }
 
-        Map<ActionSimple, Float> expected = new HashMap<>();
-        expected.put(action1, 40.0f);
-        expected.put(action2, 40.0f);
+    // Vérifie qu'une exception est levée si la composition passée au constructeur est nulle
+    @Test
+    void testConstructeurB() {
+        assertThrows(IllegalArgumentException.class, () -> new ActionComposee(null));
+    }
 
-        assertEquals(expected, actionComposee.getComposition());
+    // Vérifie que getComposition retourne une copie et non la map interne (protection contre modification externe)
+    @Test
+    void testComposition() {
+        ActionComposee ac = new ActionComposee(validComposition);
+        Map<String, Float> comp1 = ac.getComposition();
+        comp1.put("Fake", 10.0f);
+        assertFalse(ac.getComposition().containsKey("Fake"));
     }
 }
