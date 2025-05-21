@@ -89,7 +89,7 @@ public class ClientTest {
         Portfeuille p = new Portfeuille();
 
         //Ajouter des actions aux portefeuille
-        p.setActions(List.of(new ActionSimple("Action simple")));
+        p.setActions(List.of(new ActionSimple("Action simple", null)));
         c.setPortfeuille(p);
 
         Portfeuille result = c.getPortfeuille();
@@ -111,7 +111,7 @@ public class ClientTest {
         Portfeuille p = new Portfeuille();
 
         //Ajouter des actions aux portefeuille
-        p.setActions(List.of(new ActionSimple("Action simple")));
+        p.setActions(List.of(new ActionSimple("Action simple", null)));
         c.setPortfeuille(p);
 
         assertEquals(false,c.suppressionPortfeuille());

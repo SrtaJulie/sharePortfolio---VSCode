@@ -16,8 +16,10 @@
 package fr.utc.miage.shares;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class ActionTest {
@@ -88,6 +90,14 @@ class ActionTest {
     void testHashCode() {
         final Action action = new ActionImpl(FOO_SHARE1);
         Assertions.assertDoesNotThrow(action::hashCode, "hashcode must always provide a value");
+    }
+
+    @Test
+    void testGetHashMap() {
+        final Action action = new ActionImpl(FOO_SHARE1);
+        Map<Jour, Double> result = action.getMapCours();
+
+        assertEquals(COUR, result);
     }
 
     private static class ActionImpl extends Action {
