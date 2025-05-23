@@ -18,11 +18,13 @@ package fr.utc.miage.shares;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Classe portefeuille
+/**
+ * Allows the creation of simple Portefeuille objects.
+ *
  */
 public class Portfeuille {
 
+     /** Liste des actions du portefeuille */
     List<Action> actions;
 
     /**
@@ -35,7 +37,7 @@ public class Portfeuille {
     /**
      * donne les actions du portfeuille
      *
-     * @return actions
+     * @return actions Les actions qui du portefeuille
      */
     public List<Action> getActions() {
         return actions;
@@ -44,16 +46,21 @@ public class Portfeuille {
     /**
      * change les actions du portefeuille (setter) throw NullPointerException
      *
-     * @param actions List<Action>
+     * @param actions Les actions qui vont remplacées celle actuelle
      */
     public void setActions(List<Action> actions) {
+        for (Action action : actions) {
+            if (action == null) {
+                throw new NullPointerException();
+            }
+        }
         this.actions = actions;
     }
 
     /**
      * Ajoute une action throw NullPointerException si action est null
      *
-     * @param action
+     * @param action Les actions qui vont être ajoutés aux portefeuille
      */
     public void ajoutAction(ActionSimple action) {
         if (action == null) {
