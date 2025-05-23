@@ -75,4 +75,31 @@ public class ActionSimple extends Action {
         return this.cour.get(jour);
     }
 
+    /**
+     * Modification des paramètre d'une action simple
+     * 
+     * @param libelle le nouveau nom de l'action
+     * @param cour le nouveau tableau
+     */
+    public void modifierActionSimple(String libelle, Map<Jour,Double>cour){
+        setCour(cour);
+        setLibelle(libelle);
+    }
+
+    /**
+     * 
+     * @return le tableau des cours
+     */
+    public Map<Jour, Double> getCour() {
+        return cour;
+    }
+
+    /**
+     * Setter du tableau d'une action simple
+     * 
+     * @param cour un nouveau tableau
+     */
+    public void setCour(Map<Jour, Double> cour) {
+        this.cour = cour;
+    }
 }
