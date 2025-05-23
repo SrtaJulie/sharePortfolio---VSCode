@@ -26,7 +26,7 @@ import java.util.Objects;
  */
 public abstract class Action {
 
-    private final String libelle;
+    private String libelle;
     private final Map<Jour, Double> mapCours;
 
     /**
@@ -44,6 +44,10 @@ public abstract class Action {
      */
     public String getLibelle() {
         return libelle;
+    }
+
+    public void setLibelle(String libelleS){
+        this.libelle=libelleS;
     }
 
     /**
