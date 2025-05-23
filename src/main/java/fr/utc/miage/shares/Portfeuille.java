@@ -38,6 +38,9 @@ public class Portfeuille {
     }
 
     public void ajoutAction(ActionSimple action) {
+        if (action == null) {
+            throw new NullPointerException();
+        }
         this.actions.add(action);
     }
 
