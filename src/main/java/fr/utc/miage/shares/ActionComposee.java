@@ -1,3 +1,19 @@
+/*
+ * Copyright 2025 Team Dev ABCEJOY;.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package fr.utc.miage.shares;
 
 import java.util.HashMap;
@@ -14,10 +30,8 @@ public class ActionComposee {
 
     /**
      * Constructeur : crée une ActionComposee à partir d'une composition.
-     *
      * @param composition Map des actions simples et leur pourcentage
-     * @throws IllegalArgumentException si la map est nulle ou contient moins de
-     * 2 actions
+     * @throws IllegalArgumentException si la map est nulle ou contient moins de 2 actions
      */
     public ActionComposee(Map<ActionSimple, Float> composition) {
         if (composition == null || composition.size() < 2) {
@@ -28,7 +42,6 @@ public class ActionComposee {
 
     /**
      * Ajoute une ActionSimple à la composition.
-     *
      * @param actionSimple L'action à ajouter
      * @param pourcentage Le pourcentage associé
      * @throws IllegalArgumentException si le pourcentage est invalide ou si le
@@ -80,7 +93,7 @@ public class ActionComposee {
     /**
      * Retourne une map des libellés des actions simples et leur pourcentage.
      *
-     * @return Map<String, Float> (libellé -> pourcentage)
+     * @return La composition de l'action (libellé -> pourcentage)
      */
     public Map<String, Float> getComposition() {
         Map<String, Float> result = new HashMap<>();
