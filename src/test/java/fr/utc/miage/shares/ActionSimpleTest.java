@@ -111,4 +111,33 @@ class ActionSimpleTest {
         assertEquals(nouveauLibelle, action.getLibelle());
         assertEquals(nouveauCour, action.getCour());
     }
+
+    @Test
+    void testModificationLibelleVideThrowsException(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            actions.modifierActionSimple("", COUR);
+        });
+    }
+
+    @Test
+    void testModificationLibelleNullThrowsException(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            actions.modifierActionSimple(null, COUR);
+        });
+    }
+
+    @Test
+    void testModificationCoursVideThrowsException(){
+        HashMap<Jour, Double> map = new HashMap<>();
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            actions.modifierActionSimple("Action Valide", map);
+        });
+    }
+
+    @Test
+    void testModificationCoursNullThrowsException(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            actions.modifierActionSimple("Action Valide", null);
+        });
+    }
 }
