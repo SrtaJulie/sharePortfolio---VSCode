@@ -30,7 +30,9 @@ class ActionSimpleTest {
 
     private static final double VALEUR_MINIMAL_COURS = 0.01;
     private static final String LIBELLE_ACTION_SIMPLE = "tagada";
+    private static final String LIBELLE_ACTION_SIMPLE2 = "fraise";
     private static final Jour JOUR_COUR = new Jour(2025,4);
+    private static final Jour JOUR_COUR2 = new Jour(2026,6);
     private static final HashMap<Jour, Double> COUR = new HashMap<>();
     final ActionSimple actions= new ActionSimple(LIBELLE_ACTION_SIMPLE, COUR);
     
@@ -89,5 +91,12 @@ class ActionSimpleTest {
         actions.ajouterCours(JOUR_COUR, 2);
 
         Assertions.assertEquals(2, actions.valeurActionSimpleDateDonnee(JOUR_COUR));
+    }
+
+    @Test
+    void TestLibelleActionUpToDate(){
+        COUR.put(JOUR_COUR2, 3.0);
+        actions.modifierActionSimple(LIBELLE_ACTION_SIMPLE2,COUR);
+        Assertions.assertEquals(3.0, actions.valeurActionSimpleDateDonnee(JOUR_COUR2));
     }
 }
