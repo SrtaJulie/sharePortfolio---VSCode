@@ -48,7 +48,7 @@ public abstract class Action {
 
     /**
      * Modifier le nom de l'action
-     * @param libelleS
+     * @param libelleS nouveau nom pour l'action
      */
     public void setLibelle(String libelleS){
         this.libelle=libelleS;
