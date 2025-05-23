@@ -46,6 +46,10 @@ public abstract class Action {
         return libelle;
     }
 
+    /**
+     * Modifier le nom de l'action
+     * @param libelleS
+     */
     public void setLibelle(String libelleS){
         this.libelle=libelleS;
     }
