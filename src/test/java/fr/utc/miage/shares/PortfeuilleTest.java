@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package fr.utc.miage.shares;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PortfeuilleTest {
 
@@ -30,12 +30,12 @@ class PortfeuilleTest {
     public static final HashMap<Jour, Double> MAP_COURS = new HashMap<>();
 
     @Test
-    void testNewPortfeuille(){
+    void testNewPortfeuille() {
         assertDoesNotThrow(Portfeuille::new);
     }
 
     @Test
-    void testNewPortfeuilleIsEmpty(){
+    void testNewPortfeuilleIsEmpty() {
         Portfeuille p = new Portfeuille();
 
         List<Action> result = p.getActions();
@@ -46,7 +46,27 @@ class PortfeuilleTest {
     }
 
     @Test
-    void testPortefeuilleSetter(){
+    void testPortefeuilleSetter() {
+        Portfeuille p = new Portfeuille();
+        Action action = new ActionSimple(ACTION_LIBELLE, null);
+
+        ArrayList<Action> list = new ArrayList<>();
+
+        list.add(action);
+        list.add(null);
+        list.add(action);
+
+        ArrayList<Action> expected = new ArrayList<>();
+
+        assertThrows(NullPointerException.class, () -> p.setActions(list));
+
+        List<Action> result = p.getActions();
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void testPortefeuilleSetterThrowNullPointerExceptionActionNull() {
         Portfeuille p = new Portfeuille();
         Action action = new ActionSimple(ACTION_LIBELLE, null);
 
@@ -62,7 +82,7 @@ class PortfeuilleTest {
     }
 
     @Test
-    void testAjouterUneAction(){
+    void testAjouterUneAction() {
         Portfeuille p = new Portfeuille();
         ActionSimple a = getActionSimple();
 
@@ -76,7 +96,7 @@ class PortfeuilleTest {
     }
 
     @Test
-    void testAjouterUneActionNull(){
+    void testAjouterUneActionNull() {
         Portfeuille p = new Portfeuille();
 
         ArrayList<Action> expected = new ArrayList<>();
