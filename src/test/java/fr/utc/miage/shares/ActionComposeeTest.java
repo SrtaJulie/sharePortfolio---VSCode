@@ -1,3 +1,20 @@
+/*
+ * Copyright 2025 Team Dev ABCEJOY;.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
 package fr.utc.miage.shares;
 
 import java.util.HashMap;
@@ -10,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ActionComposeeTest {
+public class ActionComposeeTest {
 
     private ActionSimple action1;
     private ActionSimple action2;
@@ -36,14 +53,15 @@ class ActionComposeeTest {
     }
 
     // Teste la construction correcte et la récupération de la composition
-    @Test
-    void testValidConstructionAndGetComposition() {
-        ActionComposee ac = new ActionComposee(validComposition);
-        Map<String, Float> expected = new HashMap<>();
-        expected.put("Action A", 60.0f);
-        expected.put("Action B", 40.0f);
-        assertEquals(expected, ac.getComposition());
-    }
+@Test
+void testValidConstructionAndGetComposition() {
+    ActionComposee ac = new ActionComposee(validComposition);
+    Map<String, Float> expected = new HashMap<>();
+    expected.put("Action A", 60.0f); // ✅ corrige ici
+    expected.put("Action B", 40.0f);
+    assertEquals(expected, ac.getComposition());
+}
+
 
     // Teste la récupération du pourcentage d'une action
     @Test
@@ -64,19 +82,19 @@ class ActionComposeeTest {
     }
 
     // Teste l'ajout d'une action valide
-    @Test
-    void testAjoutAction() {
-        // Crée une composition initiale à 90%
-        Map<ActionSimple, Float> partialComposition = new HashMap<>();
-        partialComposition.put(action1, 60.0f);
-        partialComposition.put(action2, 30.0f); // total = 90%
+@Test
+void testAjoutAction() {
+    // Crée une composition initiale à 90%
+    Map<ActionSimple, Float> partialComposition = new HashMap<>();
+    partialComposition.put(action1, 60.0f);
+    partialComposition.put(action2, 30.0f); // total = 90%
 
-        ActionComposee ac = new ActionComposee(partialComposition);
-        ActionSimple action3 = new ActionSimple("Action C", new HashMap<>());
-        ac.ajoutAction(action3, 10f); // OK maintenant
+    ActionComposee ac = new ActionComposee(partialComposition);
+    ActionSimple action3 = new ActionSimple("Action C", new HashMap<>());
+    ac.ajoutAction(action3, 10f); // OK maintenant
 
-        assertEquals(10f, ac.getPourcentage(action3));
-    }
+    assertEquals(10f, ac.getPourcentage(action3));
+}
 
     // Teste l'ajout d'une action avec un pourcentage négatif ou nul
     @Test
@@ -101,7 +119,7 @@ class ActionComposeeTest {
         ActionComposee ac = new ActionComposee(validComposition);
         ac.retirerAction(action1);
         assertNull(ac.getPourcentage(action1));
-
+        // On peut aussi vérifier que la composition ne contient plus l'action
         assertFalse(ac.getComposition().containsKey("Action A"));
     }
 
