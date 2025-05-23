@@ -17,11 +17,13 @@
 
 package fr.utc.miage.shares;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ClientTest {
 
@@ -29,13 +31,15 @@ public class ClientTest {
     public static final String NOM = "michel";
     public static final String NOM_MODIFIE = "nom_modifié";
     public static final String PRENOM_MODIFIE = "prenom_modifié";
+    public static final String LIBELLE_ACT = "Action simple";
+    public static final HashMap<Jour, Double> MAP_COURS = new HashMap<>();
 
     @Test
     void testCheckClientID() {
-        Client clientRef = new Client(NOM, new Portfeuille(), PRENOM);
+        Client clientRef = getClient();
         int baseId = clientRef.getId();
-        Client c1 = new Client(NOM, new Portfeuille(), PRENOM);
-        Client c2 = new Client(NOM, new Portfeuille(), PRENOM);
+        Client c1 = getClient();
+        Client c2 = getClient();
 
         assertEquals(baseId + 1, c1.getId());
         assertEquals(baseId + 2, c2.getId());
@@ -43,7 +47,7 @@ public class ClientTest {
 
     @Test
     void testCheckClientNomEtPrenom() {
-        Client c = new Client(NOM, new Portfeuille(), PRENOM);
+        Client c = getClient();
         assertAll("Test nom et prenom",
                 () -> {
                     String result = c.getNom();
@@ -58,7 +62,7 @@ public class ClientTest {
 
     @Test
     void testSetNomEtPrenom() {
-        Client c = new Client(NOM, new Portfeuille(), PRENOM);
+        Client c = getClient();
         c.setNom(NOM_MODIFIE);
         c.setPrenom(PRENOM_MODIFIE);
         assertAll("Test set nom et prenom",
@@ -84,7 +88,7 @@ public class ClientTest {
 
     @Test
     void testSetPortefeuille() {
-        Client c = new Client(NOM, new Portfeuille(), PRENOM);
+        Client c = getClient();
 
         Portfeuille p = new Portfeuille();
 
@@ -99,14 +103,14 @@ public class ClientTest {
 
     @Test
     void testSupprimerPortefeuilleVide() {
-        Client c = new Client(NOM, new Portfeuille(), PRENOM);
+        Client c = getClient();
 
         assertEquals(true,c.suppressionPortfeuille());
     }
 
     @Test
     void testSupprimerUnPortefeuilleNonVide() {
-        Client c = new Client(NOM, new Portfeuille(), PRENOM);
+        Client c = getClient();
 
         Portfeuille p = new Portfeuille();
 
@@ -122,6 +126,79 @@ public class ClientTest {
         Client c = new Client(NOM, null, PRENOM);
 
         assertEquals(false,c.suppressionPortfeuille());
+    }
+
+    @Test
+    void testAcheterActionNull(){
+        ActionSimple a = null;
+        Client c = getClient();
+
+        assertThrows(NullPointerException.class, () -> {
+            c.acheterActionSimple(a);
+        });
+    }
+
+    @Test
+    void testAcheterPlusieursActionDontUneNull(){
+        ActionSimple a = getActionSimple();
+        List<ActionSimple> list = new ArrayList<>();
+        list.add(a);
+        list.add(null);
+        list.add(a);
+        Client c = getClient();
+        assertThrows(NullPointerException.class, () -> {
+            c.acheterPlusieursActionsSimple(list);
+        });
+
+        List<Action> rs = c.getPortfeuille().getActions();
+
+        ArrayList<Action> expected = new ArrayList<>();
+        assertEquals(expected, rs);
+    }
+
+    @Test
+    void testSupprimerUnePortfeuilleNonVide(){
+        ActionSimple a = getActionSimple();
+        Client c = getClient();
+        c.acheterActionSimple(a);
+        boolean rs = c.suppressionPortfeuille();
+
+        assertEquals(false, rs);
+    }
+
+    @Test
+    void testAjouterUneActionsSimple(){
+        ActionSimple a = getActionSimple();
+        List<ActionSimple> list = new ArrayList<>();
+        list.add(a);
+        Client c = getClient();
+        c.acheterActionSimple(a);
+        List<Action> rs = c.getPortfeuille().getActions();
+
+        assertEquals(list, rs);
+    }
+
+    @Test
+    void testAjouterPlusieursActionsSimple(){
+        ActionSimple a = getActionSimple();
+        List<ActionSimple> list = new ArrayList<>();
+        list.add(a);
+        list.add(a);
+        list.add(a);
+        Client c = getClient();
+        c.acheterPlusieursActionsSimple(list);
+        List<Action> rs = c.getPortfeuille().getActions();
+
+        assertEquals(list, rs);
+    }
+
+    private static ActionSimple getActionSimple() {
+        MAP_COURS.put(new Jour(2025, 1), 100.0);
+        return new ActionSimple(LIBELLE_ACT, MAP_COURS);
+    }
+
+    private static Client getClient() {
+        return new Client(NOM, new Portfeuille(), PRENOM);
     }
 
 }
