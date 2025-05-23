@@ -7,20 +7,21 @@ import java.util.Map;
  * Classe représentant une action composée, constituée de plusieurs ActionSimple
  * avec un pourcentage associé.
  */
-public class ActionComposee {
+public class ActionComposee extends Action {
 
     // Map associant une ActionSimple à son pourcentage dans la composition
-    private Map<ActionSimple, Float> composition;
-    private Map<Jour, Double> cours;
+    private final Map<ActionSimple, Float> composition;
 
     /**
      * Constructeur : crée une ActionComposee à partir d'une composition.
      *
+     * @param libelle     Libellé de l'action composée
      * @param composition Map des actions simples et leur pourcentage
-     * @throws IllegalArgumentException si la map est nulle ou contient moins de
-     * 2 actions
+     * @param cours       Map des cours (Jour -> valeur)
+     * @throws IllegalArgumentException si la composition est nulle ou contient moins de 2 actions
      */
-    public ActionComposee(Map<ActionSimple, Float> composition) {
+    public ActionComposee(String libelle, Map<ActionSimple, Float> composition, Map<Jour, Double> cours) {
+        super(libelle, cours);
         if (composition == null || composition.size() < 2) {
             throw new IllegalArgumentException("Une action composée doit contenir au moins deux actions simples.");
         }
@@ -36,8 +37,11 @@ public class ActionComposee {
      * total dépasse 100
      */
     public void ajoutAction(ActionSimple actionSimple, float pourcentage) {
-        if (pourcentage <= 0) {
-            throw new IllegalArgumentException("La valeur du pourcentage doit être supérieure à 0.");
+        if (actionSimple == null) {
+            throw new IllegalArgumentException("L'action ne peut pas être nulle.");
+        }
+        if (pourcentage <= 0.0f) {
+            throw new IllegalArgumentException("Le pourcentage doit être strictement positif.");
         }
         float total = getPourcentageTot() + pourcentage;
         if (total > 100.0f) {
@@ -53,8 +57,8 @@ public class ActionComposee {
      */
     public float getPourcentageTot() {
         float total = 0.0f;
-        for (Float value : composition.values()) {
-            total += value;
+        for (float pourcentage : composition.values()) {
+            total += pourcentage;
         }
         return total;
     }
@@ -93,24 +97,22 @@ public class ActionComposee {
 
     /**
      * Ajoute un cours pour un jour donné.
-     * @param jour Le jour concerné
-     * @param valeur La valeur du cours
      */
     public void ajouterCours(Jour jour, double valeur) {
-        if (cours == null) {
-            cours = new HashMap<>();
+        if (jour == null) {
+            throw new IllegalArgumentException("Le jour ne peut pas être nul.");
         }
-        cours.put(jour, valeur);
+        if (valeur <= 0.0) {
+            throw new IllegalArgumentException("La valeur du cours doit être strictement positive.");
+        }
+        super.getCours().put(jour, valeur);
     }
 
     /**
      * Retourne la map des cours (Jour -> valeur).
-     * @return Map<Jour, Double> représentant tous les cours enregistrés
      */
+    @Override
     public Map<Jour, Double> getCours() {
-        if (cours == null) {
-            return new HashMap<>();
-        }
-        return new HashMap<>(cours);
+        return new HashMap<>(super.getCours());
     }
 }
