@@ -63,11 +63,16 @@ public class Client {
         return id;
     }
 
-    public void acheterActionSimple(ActionSimple action){
+    public void acheterActionSimple(ActionSimple action) {
+        if (action == null) {
+            throw new NullPointerException();
+        }
         this.portfeuille.ajoutAction(action);
     }
 
-    public void acheterPlusieursActionsSimple(List<ActionSimple> actions){
+    public void acheterPlusieursActionsSimple(List<ActionSimple> actions) {
+        nonNullActionInList(actions);
+        
         for (ActionSimple actionSimple : actions) {
             this.acheterActionSimple(actionSimple);
         }
@@ -87,6 +92,14 @@ public class Client {
             return true;
         }
         return false;
+    }
+
+    private void nonNullActionInList(List<ActionSimple> actions) {
+        for (ActionSimple actionSimple : actions) {
+            if (actionSimple == null) {
+                throw new NullPointerException();
+            }
+        }
     }
 
     private static void augmenteID() {
