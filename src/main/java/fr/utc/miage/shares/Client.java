@@ -15,6 +15,8 @@
  */
 package fr.utc.miage.shares;
 
+import java.util.List;
+
 public class Client {
 
     private static int lastID = 0;
@@ -61,6 +63,16 @@ public class Client {
         return id;
     }
 
+    public void acheterActionSimple(ActionSimple action){
+        this.portfeuille.ajoutAction(action);
+    }
+
+    public void acheterPlusieursActionsSimple(List<ActionSimple> actions){
+        for (ActionSimple actionSimple : actions) {
+            this.acheterActionSimple(actionSimple);
+        }
+    }
+
     public boolean suppressionPortfeuille() {
         if (this.portfeuille != null && this.portefeuilleVide()) {
             this.portfeuille = null;
@@ -80,5 +92,4 @@ public class Client {
     private static void augmenteID() {
         lastID = lastID + 1;
     }
-
 }
