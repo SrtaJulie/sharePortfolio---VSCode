@@ -29,7 +29,11 @@ public class ActionSimple extends Action {
     private static final double DEFAULT_ACTION_VALUE = 0.01;
     private Map<Jour, Double> cour = new HashMap<>();
 
-    /* Constructeur */
+    /**
+     * Constructeur
+     * @param libelle le nom donnée à l'action
+     * @param cour le tableau des cours de l'action
+     */
     public ActionSimple(final String libelle, final HashMap<Jour, Double> cour) {
         // Action simple initialisée comme 1 action
         super(libelle, cour);
