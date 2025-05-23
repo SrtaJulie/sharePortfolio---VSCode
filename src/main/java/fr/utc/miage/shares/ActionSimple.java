@@ -61,12 +61,6 @@ public class ActionSimple extends Action {
         cour.put(jour, valeur);
     }
 
-    /**
-     * Retour le libelle de l'action
-     */
-    public String getLibelle() {
-        return super.getLibelle();
-    }
 
     /**
      * Recupère la valeur de l'action un jour donnée
