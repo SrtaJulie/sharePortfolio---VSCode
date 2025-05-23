@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ActionComposeeTest {
+class ActionComposeeTest {
 
     private ActionSimple action1;
     private ActionSimple action2;
