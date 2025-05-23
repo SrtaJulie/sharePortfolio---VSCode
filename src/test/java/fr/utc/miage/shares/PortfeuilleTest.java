@@ -17,15 +17,17 @@
 package fr.utc.miage.shares;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class PortfeuilleTest {
 
     private static final String ACTION_LIBELLE = "actionLibelle";
+    public static final HashMap<Jour, Double> MAP_COURS = new HashMap<>();
 
     @Test
     void testNewPortfeuille(){
@@ -57,6 +59,38 @@ class PortfeuilleTest {
         List<Action> result = p.getActions();
 
         assertEquals(expected, result);
+    }
+
+    @Test
+    void testAjouterUneAction(){
+        Portfeuille p = new Portfeuille();
+        ActionSimple a = getActionSimple();
+
+        p.ajoutAction(a);
+        List<Action> rs = p.getActions();
+
+        List<Action> expected = new ArrayList<>();
+        expected.add(a);
+
+        assertEquals(expected, rs);
+    }
+
+    @Test
+    void testAjouterUneActionNull(){
+        Portfeuille p = new Portfeuille();
+
+        ArrayList<Action> expected = new ArrayList<>();
+        List<Action> rs = p.getActions();
+
+        assertThrows(NullPointerException.class, () -> {
+            p.ajoutAction(null);
+        });
+        assertEquals(expected, rs);
+    }
+
+    private static ActionSimple getActionSimple() {
+        MAP_COURS.put(new Jour(2025, 1), 100.0);
+        return new ActionSimple(ACTION_LIBELLE, MAP_COURS);
     }
 
 }
