@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActionComposeeTest {
+class ActionComposeeTest {
 
     private ActionSimple action1;
     private ActionSimple action2;
