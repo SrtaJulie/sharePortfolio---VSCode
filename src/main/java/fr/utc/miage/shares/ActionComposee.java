@@ -97,6 +97,8 @@ public class ActionComposee extends Action {
 
     /**
      * Ajoute un cours pour un jour donné.
+     * @param jour   Le jour pour lequel le cours est ajouté
+     * @param valeur La valeur du cours 
      */
    public void ajouterCours(Jour jour, double valeur) {
         if (jour == null) {
@@ -110,9 +112,10 @@ public class ActionComposee extends Action {
 
     /**
      * Retourne la map des cours (Jour -> valeur).
+     * @return Map des cours
      */
     
-     
+
     public Map<Jour, Double> getCours() {
         return new HashMap<>(super.getMapCours());
     }
