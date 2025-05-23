@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -95,8 +96,19 @@ class ActionSimpleTest {
 
     @Test
     void TestLibelleActionUpToDate(){
-        COUR.put(JOUR_COUR2, 3.0);
-        actions.modifierActionSimple(LIBELLE_ACTION_SIMPLE2,COUR);
-        Assertions.assertEquals(3.0, actions.valeurActionSimpleDateDonnee(JOUR_COUR2));
+         // Initialisation de l'objet à tester
+        ActionSimple action = new ActionSimple(LIBELLE_ACTION_SIMPLE, COUR);
+
+        // Données de test
+        String nouveauLibelle = "Nouvelle Action";
+        Map<Jour, Double> nouveauCour = new HashMap<>();
+        nouveauCour.put(JOUR_COUR2, 100.0);
+
+        // Appel de la méthode à tester
+        action.modifierActionSimple(nouveauLibelle, nouveauCour);
+
+        // Vérification que les champs ont bien été modifiés
+        assertEquals(nouveauLibelle, action.getLibelle());
+        assertEquals(nouveauCour, action.getCour());
     }
 }
