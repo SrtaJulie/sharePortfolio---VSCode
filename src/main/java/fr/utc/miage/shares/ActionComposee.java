@@ -1,3 +1,19 @@
+/*
+ * Copyright 2025 Team Dev ABCEJOY;.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package fr.utc.miage.shares;
 
 import java.util.HashMap;
@@ -7,21 +23,17 @@ import java.util.Map;
  * Classe représentant une action composée, constituée de plusieurs ActionSimple
  * avec un pourcentage associé.
  */
-public class ActionComposee extends Action {
+public class ActionComposee {
 
     // Map associant une ActionSimple à son pourcentage dans la composition
-    private final Map<ActionSimple, Float> composition;
+    private Map<ActionSimple, Float> composition;
 
     /**
      * Constructeur : crée une ActionComposee à partir d'une composition.
-     *
-     * @param libelle     Libellé de l'action composée
      * @param composition Map des actions simples et leur pourcentage
-     * @param cours       Map des cours (Jour -> valeur)
-     * @throws IllegalArgumentException si la composition est nulle ou contient moins de 2 actions
+     * @throws IllegalArgumentException si la map est nulle ou contient moins de 2 actions
      */
-    public ActionComposee(String libelle, Map<ActionSimple, Float> composition, Map<Jour, Double> cours) {
-        super(libelle, new HashMap<>(cours)); // Conversion explicite en HashMap
+    public ActionComposee(Map<ActionSimple, Float> composition) {
         if (composition == null || composition.size() < 2) {
             throw new IllegalArgumentException("Une action composée doit contenir au moins deux actions simples.");
         }
@@ -30,18 +42,14 @@ public class ActionComposee extends Action {
 
     /**
      * Ajoute une ActionSimple à la composition.
-     *
      * @param actionSimple L'action à ajouter
      * @param pourcentage Le pourcentage associé
      * @throws IllegalArgumentException si le pourcentage est invalide ou si le
      * total dépasse 100
      */
     public void ajoutAction(ActionSimple actionSimple, float pourcentage) {
-        if (actionSimple == null) {
-            throw new IllegalArgumentException("L'action ne peut pas être nulle.");
-        }
-        if (pourcentage <= 0.0f) {
-            throw new IllegalArgumentException("Le pourcentage doit être strictement positif.");
+        if (pourcentage <= 0) {
+            throw new IllegalArgumentException("La valeur du pourcentage doit être supérieure à 0.");
         }
         float total = getPourcentageTot() + pourcentage;
         if (total > 100.0f) {
@@ -57,8 +65,8 @@ public class ActionComposee extends Action {
      */
     public float getPourcentageTot() {
         float total = 0.0f;
-        for (float pourcentage : composition.values()) {
-            total += pourcentage;
+        for (Float value : composition.values()) {
+            total += value;
         }
         return total;
     }
@@ -93,30 +101,5 @@ public class ActionComposee extends Action {
             result.put(entry.getKey().getLibelle(), entry.getValue());
         }
         return result;
-    }
-
-    /**
-     * Ajoute un cours pour un jour donné.
-     * @param jour   Le jour pour lequel le cours est ajouté
-     * @param valeur La valeur du cours 
-     */
-   public void ajouterCours(Jour jour, double valeur) {
-        if (jour == null) {
-            throw new IllegalArgumentException("Le jour ne peut pas être nul.");
-        }
-        if (valeur <= 0.0) {
-            throw new IllegalArgumentException("La valeur du cours doit être strictement positive.");
-        }
-        super.getMapCours().put(jour, valeur); // Utilise getMapCours()
-    }
-
-    /**
-     * Retourne la map des cours (Jour -> valeur).
-     * @return Map des cours
-     */
-    
-
-    public Map<Jour, Double> getCours() {
-        return new HashMap<>(super.getMapCours());
     }
 }
