@@ -50,8 +50,8 @@ class ActionTest {
     @Test
     void testEqualsWithSameObject() {
         final Action action = new ActionImpl(FOO_SHARE1);
-
-        Assertions.assertTrue(action.equals(action));
+        boolean rs = action.equals(action);
+        Assertions.assertEquals(true, rs);
     }
 
     @Test
@@ -59,7 +59,8 @@ class ActionTest {
         final Action action1 = new ActionImpl(FOO_SHARE1);
         final Action action2 = new ActionImpl(FOO_SHARE1);
 
-        Assertions.assertTrue(action1.equals(action2));
+        boolean rs = action1.equals(action2);
+        Assertions.assertEquals(true, rs);
     }
 
     @Test
@@ -67,7 +68,8 @@ class ActionTest {
         final Action action1 = new ActionImpl(FOO_SHARE1);
         final Action action2 = new ActionImpl(FOO_SHARE2);
 
-        Assertions.assertFalse(action1.equals(action2));
+        boolean rs = action1.equals(action2);
+        Assertions.assertEquals(false, rs);
     }
 
     @Test
@@ -75,7 +77,8 @@ class ActionTest {
         final Action action1 = new ActionImpl(FOO_SHARE1);
         final Action action2 = null;
 
-        Assertions.assertFalse(action1.equals(action2));
+        boolean rs = action1.equals(action2);
+        Assertions.assertEquals(false, rs);
     }
 
     @Test
@@ -83,7 +86,8 @@ class ActionTest {
         final Action action1 = new ActionImpl(FOO_SHARE1);
         final Integer action2 = 0;
 
-        Assertions.assertFalse(action1.equals(action2));
+        boolean rs = action1.equals(action2);
+        Assertions.assertEquals(false, rs);
     }
 
     @Test
