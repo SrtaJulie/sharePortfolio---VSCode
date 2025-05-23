@@ -47,11 +47,14 @@ class ActionSimpleTest {
     @Test
     void testCourValueSup0ShouldNotThrhowException(){
             actions.ajouterCours(JOUR_COUR, VALEUR_MINIMAL_COURS); // Ne doit pas lever d'exception
+            
+            //On verifie que la valeur a bien été ajoutée
+            assertEquals(VALEUR_MINIMAL_COURS, actions.valeurActionSimpleDateDonnee(JOUR_COUR));
     }
 
     @Test
     void testLibelleIdentique(){
-        Assertions.assertEquals(actions.getLibelle(), LIBELLE_ACTION_SIMPLE);
+        Assertions.assertEquals(LIBELLE_ACTION_SIMPLE, actions.getLibelle());
     }
 
     @Test
@@ -81,4 +84,10 @@ class ActionSimpleTest {
         assertEquals(105.0, action.getMapCours().get(new Jour(2025, 2)), "La valeur associée à Jour(2025, 2) devrait être 105.0");
     }
     
+    @Test
+    void testValeurActionJourDonnee() {
+        actions.ajouterCours(JOUR_COUR, 2);
+
+        Assertions.assertEquals(2, actions.valeurActionSimpleDateDonnee(JOUR_COUR));
+    }
 }
