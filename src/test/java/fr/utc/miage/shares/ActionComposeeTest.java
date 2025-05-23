@@ -33,15 +33,14 @@ public class ActionComposeeTest {
     }
 
     // Teste la construction correcte et la récupération de la composition
-@Test
-void testValidConstructionAndGetComposition() {
-    ActionComposee ac = new ActionComposee(validComposition);
-    Map<String, Float> expected = new HashMap<>();
-    expected.put("Action A", 60.0f); // ✅ corrige ici
-    expected.put("Action B", 40.0f);
-    assertEquals(expected, ac.getComposition());
-}
-
+    @Test
+    void testValidConstructionAndGetComposition() {
+        ActionComposee ac = new ActionComposee(validComposition);
+        Map<String, Float> expected = new HashMap<>();
+        expected.put("Action A", 60.0f); // ✅ corrige ici
+        expected.put("Action B", 40.0f);
+        assertEquals(expected, ac.getComposition());
+    }
 
     // Teste la récupération du pourcentage d'une action
     @Test
@@ -62,19 +61,19 @@ void testValidConstructionAndGetComposition() {
     }
 
     // Teste l'ajout d'une action valide
-@Test
-void testAjoutAction() {
-    // Crée une composition initiale à 90%
-    Map<ActionSimple, Float> partialComposition = new HashMap<>();
-    partialComposition.put(action1, 60.0f);
-    partialComposition.put(action2, 30.0f); // total = 90%
+    @Test
+    void testAjoutAction() {
+        // Crée une composition initiale à 90%
+        Map<ActionSimple, Float> partialComposition = new HashMap<>();
+        partialComposition.put(action1, 60.0f);
+        partialComposition.put(action2, 30.0f); // total = 90%
 
-    ActionComposee ac = new ActionComposee(partialComposition);
-    ActionSimple action3 = new ActionSimple("Action C", new HashMap<>());
-    ac.ajoutAction(action3, 10f); // OK maintenant
+        ActionComposee ac = new ActionComposee(partialComposition);
+        ActionSimple action3 = new ActionSimple("Action C", new HashMap<>());
+        ac.ajoutAction(action3, 10f); // OK maintenant
 
-    assertEquals(10f, ac.getPourcentage(action3));
-}
+        assertEquals(10f, ac.getPourcentage(action3));
+    }
 
     // Teste l'ajout d'une action avec un pourcentage négatif ou nul
     @Test
