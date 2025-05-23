@@ -25,34 +25,53 @@ import java.util.Map;
  */
 public class ActionSimple extends Action {
 
+    /* Propriétées */
     private static final double DEFAULT_ACTION_VALUE = 0.01;
+    private Map<Jour, Double> cour = new HashMap<>();
 
-    // constructeur
+    /* Constructeur */
     public ActionSimple(final String libelle, final HashMap<Jour, Double> cour) {
         // Action simple initialisée comme 1 action
         super(libelle, cour);
     }
 
+    /**
+     * 
+     * @return la valeur par défaut de l'action en double
+     */
     public static double getDefaultActionValue() {
         return DEFAULT_ACTION_VALUE;
     }
 
-    private Map<Jour, Double> cour = new HashMap<>();
-
+    /**
+     * Ajoute un cours au tableau de l'action
+     * @param jour le jour du cours
+     * @param valeur la valeur du cours
+     */
     public void ajouterCours(Jour jour, double valeur) {
         if (valeur <= 0.0) {
             throw new IllegalArgumentException("La valeur du cours doit être strictement positive.");
         }
         cour.put(jour, valeur);
     }
+    
     /**
-     * Ajoute un cours à la liste des cours de l'action.
-     *
-     * @param jour le jour du cours
-     * @param cours le cours de l'action
+     * Retour le libelle de l'action 
      */
     public String getLibelle() {
         return super.getLibelle();
+    }
+
+    /**
+     * Recupère la valeur de l'action un jour donnée
+     * @param jour le jour du cours
+     * @return la valeur de l'action
+     */
+    public double valeurActionSimpleDateDonnee(Jour jour){
+        double valeur = 0.0;
+
+        valeur = this.cour.get(jour);
+        return valeur;
     }
 
 }
