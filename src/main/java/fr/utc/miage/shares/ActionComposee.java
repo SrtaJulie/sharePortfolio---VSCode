@@ -93,7 +93,7 @@ public class ActionComposee {
     /**
      * Retourne une map des libellés des actions simples et leur pourcentage.
      *
-     * @return Map<String, Float> (libellé -> pourcentage)
+     * @return La composition de l'action (libellé -> pourcentage)
      */
     public Map<String, Float> getComposition() {
         Map<String, Float> result = new HashMap<>();
