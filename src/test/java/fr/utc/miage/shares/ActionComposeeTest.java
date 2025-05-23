@@ -127,4 +127,48 @@ class ActionComposeeTest {
     void testConstructeurAvecNull() {
         assertThrows(IllegalArgumentException.class, () -> new ActionComposee(null));
     }
+
+        @Test
+    void testAjouterCours() {
+        // Préparation d'une composition valide
+        ActionSimple action1 = new ActionSimple("A1");
+        ActionSimple action2 = new ActionSimple("A2");
+        Map<ActionSimple, Float> composition = new HashMap<>();
+        composition.put(action1, 60f);
+        composition.put(action2, 40f);
+
+        ActionComposee actionComposee = new ActionComposee(composition);
+
+        Jour jour = Jour.LUNDI; // Remplace par la bonne valeur selon ton enum Jour
+        double valeur = 123.45;
+
+        actionComposee.ajouterCours(jour, valeur);
+
+        Map<Jour, Double> cours = actionComposee.getCours();
+        assertTrue(cours.containsKey(jour));
+        assertEquals(valeur, cours.get(jour));
+    }
+        @Test
+    void testGetCours() {
+        // Préparation d'une composition valide
+        ActionSimple action1 = new ActionSimple("A1");
+        ActionSimple action2 = new ActionSimple("A2");
+        Map<ActionSimple, Float> composition = new HashMap<>();
+        composition.put(action1, 60f);
+        composition.put(action2, 40f);
+
+        ActionComposee actionComposee = new ActionComposee(composition);
+
+        // Ajout de cours
+        Jour jour1 = Jour.LUNDI;
+        Jour jour2 = Jour.MARDI;
+        actionComposee.ajouterCours(jour1, 100.0);
+        actionComposee.ajouterCours(jour2, 200.0);
+
+        Map<Jour, Double> cours = actionComposee.getCours();
+
+        assertEquals(2, cours.size());
+        assertEquals(100.0, cours.get(jour1));
+        assertEquals(200.0, cours.get(jour2));
+    }
 }
