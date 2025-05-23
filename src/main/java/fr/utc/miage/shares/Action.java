@@ -48,8 +48,8 @@ public abstract class Action {
 
     /**
      * Builds an Action object from a string parameter.
-     *
-     * @param libelle the name of the action object
+     * @param libelle le nom de l'action 
+     * @param cour le tableau des cours
      */
     protected Action(final String libelle, final HashMap<Jour,Double> cour) {
         this.libelle = libelle;
