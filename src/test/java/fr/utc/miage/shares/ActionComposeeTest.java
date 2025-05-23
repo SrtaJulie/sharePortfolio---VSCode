@@ -1,11 +1,14 @@
 package fr.utc.miage.shares;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ActionComposeeTest {
 
@@ -37,7 +40,7 @@ class ActionComposeeTest {
     void testValidConstructionAndGetComposition() {
         ActionComposee ac = new ActionComposee(validComposition);
         Map<String, Float> expected = new HashMap<>();
-        expected.put("Action A", 60.0f); // ✅ corrige ici
+        expected.put("Action A", 60.0f);
         expected.put("Action B", 40.0f);
         assertEquals(expected, ac.getComposition());
     }
@@ -98,7 +101,7 @@ class ActionComposeeTest {
         ActionComposee ac = new ActionComposee(validComposition);
         ac.retirerAction(action1);
         assertNull(ac.getPourcentage(action1));
-        // On peut aussi vérifier que la composition ne contient plus l'action
+
         assertFalse(ac.getComposition().containsKey("Action A"));
     }
 
