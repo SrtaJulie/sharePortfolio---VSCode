@@ -37,5 +37,9 @@ public class Portfeuille {
         this.actions = actions;
     }
 
+    public void ajoutAction(ActionSimple action) {
+        this.actions.add(action);
+    }
+
 
 }
