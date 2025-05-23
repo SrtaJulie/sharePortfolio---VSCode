@@ -21,7 +21,7 @@ public class ActionComposee extends Action {
      * @throws IllegalArgumentException si la composition est nulle ou contient moins de 2 actions
      */
     public ActionComposee(String libelle, Map<ActionSimple, Float> composition, Map<Jour, Double> cours) {
-        super(libelle, cours);
+        super(libelle, new HashMap<>(cours)); // Conversion explicite en HashMap
         if (composition == null || composition.size() < 2) {
             throw new IllegalArgumentException("Une action composée doit contenir au moins deux actions simples.");
         }
@@ -98,21 +98,22 @@ public class ActionComposee extends Action {
     /**
      * Ajoute un cours pour un jour donné.
      */
-    public void ajouterCours(Jour jour, double valeur) {
+   public void ajouterCours(Jour jour, double valeur) {
         if (jour == null) {
             throw new IllegalArgumentException("Le jour ne peut pas être nul.");
         }
         if (valeur <= 0.0) {
             throw new IllegalArgumentException("La valeur du cours doit être strictement positive.");
         }
-        super.getCours().put(jour, valeur);
+        super.getMapCours().put(jour, valeur); // Utilise getMapCours()
     }
 
     /**
      * Retourne la map des cours (Jour -> valeur).
      */
-    @Override
+    
+     
     public Map<Jour, Double> getCours() {
-        return new HashMap<>(super.getCours());
+        return new HashMap<>(super.getMapCours());
     }
 }
