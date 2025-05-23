@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Classe représentant une action composée, constituée de plusieurs ActionSimple avec un pourcentage associé.
+ * Classe représentant une action composée, constituée de plusieurs ActionSimple
+ * avec un pourcentage associé.
  */
 public class ActionComposee {
 
@@ -13,8 +14,10 @@ public class ActionComposee {
 
     /**
      * Constructeur : crée une ActionComposee à partir d'une composition.
+     *
      * @param composition Map des actions simples et leur pourcentage
-     * @throws IllegalArgumentException si la map est nulle ou contient moins de 2 actions
+     * @throws IllegalArgumentException si la map est nulle ou contient moins de
+     * 2 actions
      */
     public ActionComposee(Map<ActionSimple, Float> composition) {
         if (composition == null || composition.size() < 2) {
@@ -25,9 +28,11 @@ public class ActionComposee {
 
     /**
      * Ajoute une ActionSimple à la composition.
+     *
      * @param actionSimple L'action à ajouter
      * @param pourcentage Le pourcentage associé
-     * @throws IllegalArgumentException si le pourcentage est invalide ou si le total dépasse 100
+     * @throws IllegalArgumentException si le pourcentage est invalide ou si le
+     * total dépasse 100
      */
     public void ajoutAction(ActionSimple actionSimple, float pourcentage) {
         if (pourcentage <= 0) {
@@ -42,6 +47,7 @@ public class ActionComposee {
 
     /**
      * Calcule le pourcentage total de la composition.
+     *
      * @return la somme des pourcentages
      */
     public float getPourcentageTot() {
@@ -54,6 +60,7 @@ public class ActionComposee {
 
     /**
      * Retire une ActionSimple de la composition.
+     *
      * @param actionSimple L'action à retirer
      */
     public void retirerAction(ActionSimple actionSimple) {
@@ -62,6 +69,7 @@ public class ActionComposee {
 
     /**
      * Récupère le pourcentage d'une ActionSimple dans la composition.
+     *
      * @param actionSimple L'action recherchée
      * @return Le pourcentage associé, ou null si absente
      */
@@ -71,6 +79,7 @@ public class ActionComposee {
 
     /**
      * Retourne une map des libellés des actions simples et leur pourcentage.
+     *
      * @return Map<String, Float> (libellé -> pourcentage)
      */
     public Map<String, Float> getComposition() {
