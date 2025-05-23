@@ -31,8 +31,9 @@ public class ActionSimple extends Action {
 
     /**
      * Constructeur
+     * 
      * @param libelle le nom donnée à l'action
-     * @param cour le tableau des cours de l'action
+     * @param cour    le tableau des cours de l'action
      */
     public ActionSimple(final String libelle, final HashMap<Jour, Double> cour) {
         // Action simple initialisée comme 1 action
@@ -49,7 +50,8 @@ public class ActionSimple extends Action {
 
     /**
      * Ajoute un cours au tableau de l'action
-     * @param jour le jour du cours
+     * 
+     * @param jour   le jour du cours
      * @param valeur la valeur du cours
      */
     public void ajouterCours(Jour jour, double valeur) {
@@ -58,20 +60,21 @@ public class ActionSimple extends Action {
         }
         cour.put(jour, valeur);
     }
-    
+
     /**
-     * Retour le libelle de l'action 
+     * Retour le libelle de l'action
      */
     public String getLibelle() {
         return super.getLibelle();
     }
 
-   /**
-    * Recupère la valeur de l'action un jour donnée
-    * @param jour le jour (année, jour)
-    * @return la valeur de l'action un jour donnée
-    */
-    public double valeurActionSimpleDateDonnee(Jour jour){
+    /**
+     * Recupère la valeur de l'action un jour donnée
+     * 
+     * @param jour le jour (année, jour)
+     * @return la valeur de l'action un jour donnée
+     */
+    public double valeurActionSimpleDateDonnee(Jour jour) {
         return this.cour.get(jour);
     }
 
@@ -79,9 +82,12 @@ public class ActionSimple extends Action {
      * Modification des paramètre d'une action simple
      * 
      * @param libelle le nouveau nom de l'action
-     * @param cour le nouveau tableau
+     * @param cour    le nouveau tableau
      */
-    public void modifierActionSimple(String libelle, Map<Jour,Double>cour){
+    public void modifierActionSimple(String libelle, Map<Jour, Double> cour) {
+        if (libelle == null || libelle.isBlank() || cour == null || cour.isEmpty()) {
+            throw new IllegalArgumentException("Libellé ou cours invalide");
+        }
         setCour(cour);
         setLibelle(libelle);
     }
