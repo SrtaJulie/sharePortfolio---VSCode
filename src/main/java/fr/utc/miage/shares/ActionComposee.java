@@ -11,6 +11,7 @@ public class ActionComposee {
 
     // Map associant une ActionSimple à son pourcentage dans la composition
     private Map<ActionSimple, Float> composition;
+    private Map<Jour, Double> cours;
 
     /**
      * Constructeur : crée une ActionComposee à partir d'une composition.
@@ -88,5 +89,28 @@ public class ActionComposee {
             result.put(entry.getKey().getLibelle(), entry.getValue());
         }
         return result;
+    }
+
+    /**
+     * Ajoute un cours pour un jour donné.
+     * @param jour Le jour concerné
+     * @param valeur La valeur du cours
+     */
+    public void ajouterCours(Jour jour, double valeur) {
+        if (cours == null) {
+            cours = new HashMap<>();
+        }
+        cours.put(jour, valeur);
+    }
+
+    /**
+     * Retourne la map des cours (Jour -> valeur).
+     * @return Map<Jour, Double> représentant tous les cours enregistrés
+     */
+    public Map<Jour, Double> getCours() {
+        if (cours == null) {
+            return new HashMap<>();
+        }
+        return new HashMap<>(cours);
     }
 }
