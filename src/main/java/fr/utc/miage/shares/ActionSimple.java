@@ -66,16 +66,13 @@ public class ActionSimple extends Action {
         return super.getLibelle();
     }
 
-    /**
-     * Recupère la valeur de l'action un jour donnée
-     * @param jour le jour du cours
-     * @return la valeur de l'action
-     */
+   /**
+    * Recupère la valeur de l'action un jour donnée
+    * @param jour le jour (année, jour)
+    * @return la valeur de l'action un jour donnée
+    */
     public double valeurActionSimpleDateDonnee(Jour jour){
-        double valeur = 0.0;
-
-        valeur = this.cour.get(jour);
-        return valeur;
+        return this.cour.get(jour);
     }
 
 }
