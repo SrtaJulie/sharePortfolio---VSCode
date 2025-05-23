@@ -29,6 +29,10 @@ public abstract class Action {
     private final String libelle;
     private final Map<Jour, Double> mapCours;
 
+    /**
+     * 
+     * @return le tabeau du cours de l'action
+     */
     public Map<Jour, Double> getMapCours() {
         return mapCours;
     }
@@ -41,8 +45,6 @@ public abstract class Action {
     public String getLibelle() {
         return libelle;
     }
-
-    
 
     /**
      * Builds an Action object from a string parameter.
